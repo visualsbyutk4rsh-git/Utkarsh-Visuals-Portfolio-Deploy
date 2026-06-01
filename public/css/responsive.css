@@ -1,0 +1,723 @@
+/*
+ * responsive.css — Full Responsive System
+ * Covers: mobile 320px → ultra-wide 2560px+
+ * Does NOT redesign — only tightens spacing, scaling, alignment.
+ */
+
+/* ===================================================
+   GLOBAL BASE RESETS
+   =================================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    overflow-x: hidden;
+    min-width: 320px;
+}
+
+img, video, iframe, svg {
+    max-width: 100%;
+}
+
+/* ===================================================
+   FLUID SPACING TOKENS (CSS Custom Properties)
+   =================================================== */
+:root {
+    --section-py: clamp(64px, 8vw, 128px);
+    --section-px: clamp(16px, 5vw, 80px);
+    --card-gap:   clamp(14px, 2vw, 24px);
+    --text-xs:    clamp(10px, 1.2vw, 12px);
+    --text-sm:    clamp(13px, 1.5vw, 15px);
+    --text-base:  clamp(14px, 1.6vw, 16px);
+    --text-lg:    clamp(16px, 2vw, 20px);
+    --text-xl:    clamp(18px, 2.5vw, 24px);
+    --text-2xl:   clamp(22px, 3.5vw, 32px);
+    --text-hero:  clamp(2.2rem, 6vw, 5.5rem);
+}
+
+/* ===================================================
+   PREVENT HORIZONTAL OVERFLOW GLOBALLY
+   =================================================== */
+/* Only clamp inner content containers — NOT sections themselves,
+   so hero floating/absolute elements aren't clipped */
+.max-w-7xl, .max-w-5xl, .max-w-4xl,
+.max-w-3xl, .max-w-2xl, [class*="container"] {
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Prevent horizontal scroll at body level only */
+body {
+    overflow-x: hidden !important;
+}
+
+/* Hero section: must NOT clip floating/particle children */
+section:first-of-type {
+    overflow: visible !important;
+}
+
+/* ===================================================
+   NAVBAR — RESPONSIVE
+   =================================================== */
+
+/* Mobile: shrink capsule and font */
+@media (max-width: 767px) {
+    nav.fixed {
+        top: 12px !important;
+        width: 94% !important;
+        height: 56px !important;
+        border-radius: 9999px !important;
+        padding: 0 6px !important;
+    }
+    nav.fixed > div {
+        padding-left: 14px !important;
+        padding-right: 12px !important;
+    }
+    nav.fixed a[href^="#"] {
+        font-size: 11px !important;
+    }
+    nav.fixed a[href="#contact"] {
+        display: none !important;
+    }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+    nav.fixed {
+        top: 16px !important;
+        width: 92% !important;
+        height: 60px !important;
+    }
+    nav.fixed a[href^="#"] {
+        font-size: 11.5px !important;
+        white-space: nowrap !important;
+        word-break: normal !important;
+    }
+    nav.fixed a[href="#contact"] {
+        padding: 6px 12px !important;
+        font-size: 11.5px !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+        word-break: normal !important;
+    }
+    nav.fixed a[href="#"] {
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+        word-break: normal !important;
+    }
+    nav.fixed div.md\:flex {
+        gap: 12px !important;
+    }
+}
+
+/* Ultra-wide */
+@media (min-width: 1920px) {
+    nav.fixed {
+        max-width: 1440px !important;
+    }
+}
+
+/* ===================================================
+   HERO SECTION — RESPONSIVE TYPOGRAPHY
+   =================================================== */
+@media (max-width: 767px) {
+    /* Target hero headings and CTA spacing */
+    h1 {
+        font-size: clamp(2rem, 8vw, 3.2rem) !important;
+        line-height: 1.12 !important;
+        letter-spacing: -1px !important;
+    }
+    /* Hero buttons stack on mobile — scoped to hero section only */
+    section:first-of-type .flex.gap-4,
+    section:first-of-type .flex.flex-wrap {
+        flex-direction: column;
+        align-items: stretch !important;
+        gap: 12px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    h1 {
+        font-size: clamp(2.5rem, 5vw, 3.8rem) !important;
+    }
+}
+
+@media (min-width: 2000px) {
+    h1 {
+        font-size: clamp(4rem, 5vw, 6rem) !important;
+    }
+}
+
+/* ===================================================
+   SECTION PADDING — SCOPED ONLY, NOT GLOBAL
+   Only apply to sections WE explicitly know about.
+   Avoids stretching About / For Us / Hero.
+   =================================================== */
+@media (max-width: 767px) {
+    /* Only our services and FAQ+contact strip */
+    #services[data-premium-injected="true"],
+    #faq,
+    #portfolio {
+        padding-left: 18px !important;
+        padding-right: 18px !important;
+    }
+}
+
+/* ===================================================
+   VIDEO GALLERY PORTFOLIO
+   =================================================== */
+@media (max-width: 767px) {
+    .custom-video-grid {
+        gap: 20px !important;
+        padding: 0 0 32px !important;
+        grid-template-columns: 1fr !important;
+    }
+    .custom-video-grid.vertical-grid,
+    .custom-video-grid.long-form-grid,
+    .custom-video-grid.commercial-grid,
+    .custom-video-grid.cinematic-curated-grid {
+        grid-template-columns: 1fr !important;
+    }
+    .portfolio-filter-container {
+        gap: 8px !important;
+        margin: 20px auto 30px !important;
+    }
+    .filter-btn {
+        padding: 8px 16px !important;
+        font-size: 12px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .custom-video-grid.vertical-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+    .custom-video-grid.long-form-grid,
+    .custom-video-grid.commercial-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* Video card hover — reduce on mobile */
+@media (max-width: 767px) {
+    .video-card:hover {
+        transform: translateY(-4px) scale(1.01) !important;
+    }
+    .video-sections-wrapper {
+        gap: 36px !important;
+    }
+    .section-header-title h3 {
+        font-size: 18px !important;
+    }
+}
+
+/* Video modal — full screen on mobile */
+@media (max-width: 767px) {
+    .video-container {
+        width: 95% !important;
+        max-height: 75vh !important;
+    }
+    .video-container.short-form {
+        max-width: min(85vw, 320px) !important;
+    }
+}
+
+/* Video modal close button repositioning to prevent offscreen/clipping on mobile & tablet */
+@media (max-width: 1024px) {
+    #video-modal .modal-close-btn {
+        position: fixed !important;
+        top: 16px !important;
+        right: 16px !important;
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 24px !important;
+        background: rgba(15, 23, 42, 0.75) !important;
+        backdrop-filter: blur(8px) !important;
+        -webkit-backdrop-filter: blur(8px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+        z-index: 9999999 !important;
+    }
+}
+
+/* ===================================================
+   SERVICES SECTION (svc-*)
+   =================================================== */
+@media (max-width: 767px) {
+    /* Section padding */
+    #services[data-premium-injected="true"] {
+        padding: 72px 0 !important;
+    }
+    /* Title sizing */
+    .svc-heading {
+        font-size: clamp(2rem, 7vw, 2.8rem) !important;
+        letter-spacing: -1px !important;
+    }
+    .svc-subheading {
+        font-size: 15px !important;
+        max-width: 100% !important;
+    }
+    /* Grid: single column */
+    .svc-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+    /* Disable floating animation on mobile for performance */
+    .svc-fa, .svc-fb, .svc-fc {
+        animation: none !important;
+    }
+    /* Disable 3D tilt on mobile */
+    .svc-card {
+        transform: none !important;
+        will-change: auto !important;
+    }
+    /* Tighten card inner padding */
+    .svc-card-inner {
+        padding: 26px 22px 24px !important;
+    }
+    .svc-card-title {
+        font-size: 17px !important;
+    }
+    .svc-card-desc {
+        font-size: 13.5px !important;
+    }
+    /* Reduce background glow size */
+    .svc-bg-glow, .svc-bg-glow2 {
+        width: 300px !important;
+        height: 200px !important;
+        filter: blur(50px) !important;
+        animation: none !important;
+    }
+    /* Section header bottom margin */
+    .svc-grid {
+        margin-top: 0 !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    #services[data-premium-injected="true"] {
+        padding: 80px 0 !important;
+    }
+    .svc-heading {
+        font-size: clamp(2.4rem, 4.5vw, 3.2rem) !important;
+    }
+    .svc-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 18px !important;
+    }
+    /* Reduce floating on tablet for performance */
+    .svc-fa { animation-duration: 9s !important; }
+    .svc-fb { animation-duration: 11s !important; }
+    .svc-fc { animation-duration: 13s !important; }
+}
+
+@media (min-width: 2000px) {
+    .svc-heading {
+        font-size: clamp(4rem, 4vw, 5rem) !important;
+    }
+    .svc-grid {
+        gap: 28px !important;
+    }
+    .svc-card-title {
+        font-size: 22px !important;
+    }
+    .svc-card-desc {
+        font-size: 16px !important;
+    }
+}
+
+/* ===================================================
+   TESTIMONIALS / CLIENT STORIES
+   =================================================== */
+@media (max-width: 767px) {
+    .testimonial-card {
+        flex: 0 0 calc(100% - 0px) !important;
+        padding: 24px 20px !important;
+        border-radius: 16px !important;
+    }
+    .testimonial-quote {
+        font-size: 14px !important;
+        margin: 14px 0 18px !important;
+    }
+    /* Carousel controls */
+    .carousel-nav-btn {
+        width: 36px !important;
+        height: 36px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .testimonial-card {
+        flex: 0 0 calc((100% - 20px) / 2) !important;
+        padding: 28px 24px !important;
+    }
+}
+
+/* ===================================================
+   FAQ SECTION
+   =================================================== */
+@media (max-width: 767px) {
+    .faq-accordion-wrapper {
+        max-width: 100% !important;
+        gap: 12px !important;
+    }
+    .faq-trigger {
+        padding: 18px 20px !important;
+        font-size: 14.5px !important;
+        line-height: 1.45 !important;
+    }
+    .faq-content {
+        padding: 0 20px !important;
+    }
+    .faq-item.active .faq-content {
+        padding-bottom: 20px !important;
+    }
+    .faq-content p {
+        font-size: 13.5px !important;
+        line-height: 1.65 !important;
+    }
+    /* Reduce hover lift on mobile */
+    .faq-item:hover {
+        transform: none !important;
+    }
+    .faq-item.active {
+        transform: none !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .faq-accordion-wrapper {
+        max-width: 680px !important;
+    }
+    .faq-trigger {
+        padding: 20px 26px !important;
+        font-size: 15.5px !important;
+    }
+}
+
+/* ===================================================
+   CONTACT / GET A QUOTE SECTION
+   =================================================== */
+@media (max-width: 767px) {
+    #contact {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+    /* Name + Email fields should stack vertically on mobile */
+    #contact form .grid,
+    #contact form .flex.gap-4,
+    #contact form [class*="grid-cols-2"] {
+        grid-template-columns: 1fr !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+    /* Inputs fill full width */
+    #contact input,
+    #contact textarea,
+    #contact select {
+        font-size: 14px !important;
+        width: 100% !important;
+        min-height: 46px;
+    }
+    /* Submit button full width */
+    #contact button[type="submit"],
+    #contact a[href="#contact"],
+    #contact .get-quote-btn {
+        width: 100% !important;
+        font-size: 15px !important;
+        padding: 14px 20px !important;
+        text-align: center !important;
+        justify-content: center !important;
+    }
+    /* Heading scale in contact */
+    #contact h2 {
+        font-size: clamp(1.8rem, 7vw, 2.4rem) !important;
+        letter-spacing: -0.5px !important;
+        line-height: 1.15 !important;
+    }
+    #contact p {
+        font-size: 14px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    #contact {
+        padding-left: 32px !important;
+        padding-right: 32px !important;
+    }
+    #contact h2 {
+        font-size: clamp(2rem, 4vw, 2.8rem) !important;
+    }
+}
+
+/* ===================================================
+   CINEMATIC FOOTER
+   =================================================== */
+@media (max-width: 767px) {
+    .cinematic-footer .max-w-5xl {
+        padding: 40px 20px 32px !important;
+    }
+    /* Stack logo, socials, and back-to-top vertically */
+    .cinematic-footer .flex.flex-col.md\:flex-row {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 20px !important;
+        text-align: center !important;
+    }
+    .footer-social-links {
+        gap: 20px !important;
+        justify-content: center !important;
+    }
+    .footer-social-link {
+        font-size: 13px !important;
+    }
+    .cinematic-footer .mt-10 {
+        margin-top: 24px !important;
+    }
+    .cinematic-footer .pt-6 {
+        padding-top: 18px !important;
+    }
+    /* Reduce ambient glow on mobile */
+    .footer-ambient-glow {
+        width: 300px !important;
+        height: 150px !important;
+        filter: blur(40px) !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .cinematic-footer .max-w-5xl {
+        padding: 48px 28px 36px !important;
+    }
+    .cinematic-footer .flex.flex-col.md\:flex-row {
+        gap: 24px !important;
+    }
+}
+
+/* ===================================================
+   GLASS / BACKDROP BLUR — REDUCE ON LOW-END DEVICES
+   via `prefers-reduced-motion`
+   =================================================== */
+@media (prefers-reduced-motion: reduce) {
+    .svc-fa, .svc-fb, .svc-fc,
+    .svc-bg-glow, .svc-bg-glow2,
+    .svc-card-glow,
+    .svc-card-sweep,
+    .svc-icon-box svg,
+    .verified-tick,
+    .footer-ambient-glow {
+        animation: none !important;
+        transition: none !important;
+    }
+    .svc-card {
+        transition: border-color 0.2s ease !important;
+    }
+    .video-card:hover {
+        transform: translateY(-2px) !important;
+    }
+}
+
+/* ===================================================
+   SECTION HEADINGS — ONLY SCALE OUR CUSTOM SECTIONS
+   (Keeps About/For Us untouched by the site's own React styling)
+   =================================================== */
+
+/* Contact section heading scale on small mobile */
+@media (max-width: 479px) {
+    .svc-heading {
+        font-size: clamp(1.8rem, 7.5vw, 2.4rem) !important;
+    }
+    .svc-card-title {
+        font-size: 16px !important;
+    }
+    .svc-card-desc, .testimonial-quote, .faq-content p {
+        font-size: 13px !important;
+        line-height: 1.6 !important;
+    }
+}
+
+/* Ultra-wide: only scale our injected headings */
+@media (min-width: 1920px) {
+    .svc-heading {
+        font-size: clamp(3.5rem, 3.5vw, 5rem) !important;
+    }
+}
+
+/* ===================================================
+   ULTRA-WIDE (2000px+) MAX CONTENT WIDTH CAP
+   =================================================== */
+@media (min-width: 2000px) {
+    .max-w-7xl {
+        max-width: 1600px !important;
+    }
+    .max-w-5xl {
+        max-width: 1200px !important;
+    }
+    nav.fixed {
+        max-width: 1500px !important;
+    }
+    .custom-video-grid,
+    .video-sections-wrapper,
+    .portfolio-filter-container {
+        max-width: 1600px !important;
+    }
+    .video-container {
+        max-width: 1400px !important;
+    }
+    .video-title {
+        font-size: 18px !important;
+    }
+    .video-category {
+        font-size: 11px !important;
+    }
+}
+
+@media (min-width: 2560px) {
+    .max-w-7xl {
+        max-width: 2000px !important;
+    }
+    .max-w-5xl {
+        max-width: 1600px !important;
+    }
+    nav.fixed {
+        max-width: 1800px !important;
+    }
+    .custom-video-grid,
+    .video-sections-wrapper,
+    .portfolio-filter-container {
+        max-width: 2000px !important;
+    }
+    .video-container {
+        max-width: 1800px !important;
+    }
+    .video-title {
+        font-size: 22px !important;
+    }
+    .video-category {
+        font-size: 13px !important;
+    }
+}
+
+/* ===================================================
+   MOBILE TOUCH — REMOVE HOVER EFFECTS THAT BREAK UX
+   =================================================== */
+@media (hover: none) and (pointer: coarse) {
+    /* Disable hover transforms that cause sticky states on touch */
+    .video-card:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    .svc-card:hover {
+        transform: none !important;
+    }
+    .faq-item:hover {
+        transform: none !important;
+    }
+    .testimonial-card:hover {
+        transform: none !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+    }
+    .footer-social-link:hover {
+        transform: none !important;
+    }
+    .back-to-top-btn:hover {
+        transform: none !important;
+    }
+    /* Keep subtle color changes but no motion */
+    .svc-card:active {
+        border-color: rgba(255, 255, 255, 0.12) !important;
+    }
+}
+
+@media (hover: none), (max-width: 1024px) {
+    /* Enable visible card overlays and play buttons by default on touch/tablet devices */
+    .video-overlay {
+        opacity: 1 !important;
+    }
+    .video-play-btn {
+        opacity: 1 !important;
+        transform: translate(-50%, -50%) scale(1) !important;
+    }
+    .video-title,
+    .video-category {
+        transform: translateY(0) !important;
+    }
+}
+
+/* ===================================================
+   MOBILE — DISABLE EXPENSIVE BACKDROP FILTERS
+   to preserve battery and performance
+   =================================================== */
+@media (max-width: 479px) {
+    .svc-card {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: rgba(10, 14, 26, 0.75) !important;
+    }
+    .testimonial-card {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: rgba(10, 14, 28, 0.75) !important;
+    }
+}
+
+/* ===================================================
+   ADDITIONAL MICRO-FIXES
+   =================================================== */
+
+/* Prevent long-form/commercial cards from collapsing on very small screens */
+@media (max-width: 479px) {
+    .video-card.long-form,
+    .video-card.commercial-ads {
+        min-height: 160px !important;
+    }
+    /* Prevent portfolio section from creating horizontal scroll */
+    #work {
+        overflow-x: hidden !important;
+    }
+    /* Tighten up video sections wrapper padding */
+    .video-sections-wrapper {
+        padding: 0 2px !important;
+    }
+}
+
+/* FAQ touch tap target — make trigger tall enough to tap easily */
+@media (max-width: 767px) {
+    .faq-trigger {
+        min-height: 56px !important;
+    }
+}
+
+/* iOS Safari z-index fix for modals */
+#video-modal,
+#lead-modal {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Service card min-height guard — prevent cards from being too short on mid screens */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .svc-card-inner {
+        min-height: 220px !important;
+    }
+}
+
+/* Testimonial carousel: prevent card text overflow on tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .testimonial-quote {
+        font-size: 13.5px !important;
+    }
+}
+
+/* Smooth scrolling for anchor links */
+html {
+    scroll-behavior: auto !important;
+    scroll-padding-top: 90px; /* account for fixed navbar height */
+}
+

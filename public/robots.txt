@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Block sensitive files
+Disallow: /api/
+Disallow: /leads.json
+Disallow: /leads.csv
+Disallow: /serve.ps1
+Disallow: /.vscode/
+
+Sitemap: https://utkarshvisuals.base44.app/sitemap.xml

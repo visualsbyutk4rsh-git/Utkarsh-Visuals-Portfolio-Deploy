@@ -1,0 +1,169 @@
+/* conversion-ui.css - Lead Generation & Authority UI */
+
+/* 2. Lead Capture Modal / Form */
+#lead-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    z-index: 100000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    cursor: auto !important; /* Force cursor visibility inside modal */
+}
+
+#lead-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.lead-form-container {
+    background: #0f172a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    transform: translateY(20px);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#lead-modal.active .lead-form-container {
+    transform: translateY(0);
+}
+
+.lead-form-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.lead-form-header h2 {
+    font-size: 28px;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.lead-form-header p {
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #cbd5e1;
+    font-size: 13px;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: white;
+    outline: none;
+    transition: all 0.3s;
+    cursor: auto !important;
+}
+
+.form-input:focus {
+    border-color: #3b82f6;
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+}
+
+.submit-lead-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 10px;
+}
+
+.submit-lead-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+}
+
+.close-lead-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Success Message */
+.success-overlay {
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+
+.success-overlay svg {
+    width: 60px;
+    height: 60px;
+    color: #10b981;
+    margin-bottom: 20px;
+}
+
+/* 3. Floating Call to Action */
+.cta-floating {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background: white;
+    color: black;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cta-floating:hover {
+    transform: scale(1.05) translateY(-5px);
+}
+
+.cta-floating::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 34px;
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6, #3b82f6);
+    background-size: 200%;
+    z-index: -1;
+    opacity: 0.5;
+    animation: rotate-glow 3s linear infinite;
+}
+
+@keyframes rotate-glow {
+    from { background-position: 0%; }
+    to { background-position: 200%; }
+}

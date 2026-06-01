@@ -1,0 +1,37 @@
+{
+  "name": "utkarsh-visuals",
+  "version": "1.0.0",
+  "description": "Utkarsh Visuals — Cinematic Portfolio & Lead Generation Platform",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js"
+  },
+  "keywords": [
+    "portfolio",
+    "cinematic",
+    "video-editing",
+    "lead-generation"
+  ],
+  "author": "Utkarsh Visuals",
+  "license": "PRIVATE",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@sentry/node": "^10.54.0",
+    "@supabase/supabase-js": "^2.106.2",
+    "compression": "^1.8.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.5.2",
+    "express-validator": "^7.3.2",
+    "helmet": "^8.2.0",
+    "morgan": "^1.10.1",
+    "resend": "^6.12.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

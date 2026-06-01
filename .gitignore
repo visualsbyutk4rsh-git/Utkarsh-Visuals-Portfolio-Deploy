@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Data (runtime-generated)
+data/leads.json
+data/leads.csv
+data/*.backup.*
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Build artifacts
+dist/
+
+# Debug screenshots
+*_screenshot*.png
+
+# Logs
+*.log
+npm-debug.log*
